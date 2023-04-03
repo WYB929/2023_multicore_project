@@ -72,8 +72,8 @@ def parse_data(bench, size, thread, data):
                 user_time = line.split("m")[1].split("s")[0]
             elif "sys" in line:
                 sys_time = line.split("m")[1].split("s")[0]
-    LLC_misses_percent = float(LLC_load_misses) / float(LLC_loads)
-    LLC_store_misses_percent = float(LLC_store_misses) / float(LLC_stores)    
+    LLC_misses_percent = float(LLC_load_misses) / float(LLC_loads) * 100
+    LLC_store_misses_percent = float(LLC_store_misses) / float(LLC_stores) * 100
     data.append([bench, size, thread, cycles, instructions, ins_per_cycle, cache_references, cache_misses, cache_misses_percent, 
                  branch_instructions, branch_misses, bus_cycles, ref_cycles, alignment_faults, bpf_output, cpu_clock, cpu_migrations, 
                  dummy, emulation_faults, major_faults, minor_faults, page_faults, LLC_loads, LLC_load_misses, LLC_misses_percent, 
@@ -90,6 +90,6 @@ for i in tqdm(range(10)):
                 data = parse_data(bench, size, thread, data)
 
 #save data to csv file
-with open("dataset.csv", "w") as f:
+with open("../data/dataset.csv", "w") as f:
     writer = csv.writer(f)
     writer.writerows(data)
