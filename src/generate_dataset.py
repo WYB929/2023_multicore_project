@@ -82,10 +82,10 @@ def parse_data(bench, size, thread, data):
 
 # output a txt file to record the running time of each benchmark with perf
 data = [["Benchmark", "Input Size", "Threads", "cycles", "instructions", "ins_per_cycle", "cache_references", "cache_misses", "cache_misses_percent", "branches_instructions", "branch_misses", "bus_cycles", "ref_cycles", "alignment_faults", "bpf_output", "cpu_clock", "cpu_migrations", "dummy", "emulation_faults", "major_faults", "minor_faults", "page_faults", "LLC_loads", "LLC_load_misses", "LLC_misses_percent", "LLC_stores", "LLC_store_misses", "LLC_store_misses_percent", "time", "user_time", "sys_time"]]
-for i in tqdm(range(10)):
-    for bench in tqdm(benchmarks):
-        for size in tqdm(input_size):
-            for thread in tqdm(threads):
+for i in tqdm(range(10), desc='Num'):
+    for bench in tqdm(benchmarks, desc='Benchmarks', leave=False):
+        for size in tqdm(input_size, desc='Input_Size', leave=False):
+            for thread in tqdm(threads, desc='Thread_Num', leave=False):
                 os.system("perf stat -e cycles,instructions,cache-references,cache-misses,branch-instructions,branch-misses,bus-cycles,ref-cycles,alignment-faults,bpf-output,cpu-clock,cpu-migrations,dummy,emulation-faults,major-faults,minor-faults,page-faults,LLC-loads,LLC-load-misses,LLC-stores,LLC-store-misses -o result.txt -x, /home/yibin/workspace/multicore_project/parsec-3.0/bin/parsecmgmt -a run -p %s -i %s -n %d > result_time.txt" % (bench, size, thread))
                 data = parse_data(bench, size, thread, data)
 
