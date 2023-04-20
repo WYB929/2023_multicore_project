@@ -37,3 +37,5 @@ TSTP Model Creation and Evaluation:
 TSTP_model.ipynb
 
 If you have any question about running the code, please reach out Yibin Wang (yw4145@nyu.edu).
+
+github url: https://github.com/WYB929/2023_multicore_project
